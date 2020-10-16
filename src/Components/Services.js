@@ -5,9 +5,9 @@ const Services = ({ img, name, des }) => {
 
     return (
         
-        <div id="card" className="col-sm-4 p-5" >
+        <div style={{width:"300px"}} id="card" className=" p-5" >
             <Link className="text-decoration-none text-dark" to="/order"> 
-            <img className="w-25" src={require(`../images/icons/${img}`)} alt="" />
+            <img style={{width:"150px"}} src={`http://localhost:5000/${img}`} alt="" />
             <h3>{name}</h3>
             <p>{des}</p>
             </Link>

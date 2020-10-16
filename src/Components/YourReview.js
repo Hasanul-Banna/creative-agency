@@ -1,21 +1,41 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { useForm } from 'react-hook-form';
+import { UserContext } from '../App';
 import Sidebar from './Sidebar';
 
 const YourReview = () => {
+    const [loggedInUser, setLoggedInUser] = useContext(UserContext);
+    const { register, handleSubmit, errors } = useForm();
+    const onSubmit = data => {
+        fetch('http://localhost:5000/addreview', {
+            method: 'POST',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify(data)
+        })
+            .then(res => res.json())
+            .then(success => {
+                if (success) {
+                    alert('Congrats! New review Addded')
+                }
+            })
+    };
     return (
-        <div className="d-flex flex-wrap ml-4 mt-2" >
+        <div className="row ml-4 mt-2" >
             <Sidebar></Sidebar>
-            <div style={{ width: "50%" }}>
+            <div className="col-md-6">
 
-                <form>
-                    <div class="form-group">
-                        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Your Email" />
+                <form className="pt-5 pr-5" onSubmit={handleSubmit(onSubmit)}>
+                    <div className="form-group">
+                        <input type="text" ref={register({ required: true })} name="name" placeholder="Your Name" className="form-control" />
+                        {errors.name && <span className="text-danger">This field is required</span>}
                     </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Your name/Company name" />
+                    <div className="form-group">
+                        <input type="text" ref={register({ required: true })} name="designition" placeholder="designition" className="form-control" />
+                        {errors.name && <span className="text-danger">This field is required</span>}
                     </div>
-                    <div class="form-group">
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Your message here..."></textarea>
+                    <div className="form-group">
+                        <textarea type="text" ref={register({ required: true })} name="description" placeholder="description" className="form-control" />
+                        {errors.name && <span className="text-danger">This field is required</span>}
                     </div>
                     <input type="submit" value="Send" className="btn btn-dark" />
                 </form>

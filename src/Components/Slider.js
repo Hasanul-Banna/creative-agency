@@ -25,18 +25,18 @@ const Slider = () => {
                     <div className="carousel-item">
                     <div className="container pt-5 pb-5 ">
                             <div className="row pb-3">
-                                <div className="col-sm-4"><img src={slider1} alt=""/></div>
                                 <div className="col-sm-4"><img src={slider2} alt=""/></div>
                                 <div className="col-sm-4"><img src={slider3} alt=""/></div>
+                                <div className="col-sm-4"><img src={slider1} alt=""/></div>
                             </div>
                         </div>
                     </div>
                     <div className="carousel-item">
                     <div className="container pt-5 pb-5 ">
                             <div className="row pb-3">
+                                <div className="col-sm-4"><img src={slider3} alt=""/></div>
                                 <div className="col-sm-4"><img src={slider1} alt=""/></div>
                                 <div className="col-sm-4"><img src={slider2} alt=""/></div>
-                                <div className="col-sm-4"><img src={slider3} alt=""/></div>
                             </div>
                         </div>
                     </div>

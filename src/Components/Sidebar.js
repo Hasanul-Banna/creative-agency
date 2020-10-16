@@ -5,15 +5,16 @@ import logo from "../images/logo.png" ;
 
 const Sidebar = () => {
     return (
-        <div style={{width:"20%"}} className="d-flex flex-column float-left">
-            <img className="w-75" src={logo} alt=""/>
+        <div style={{overflowX:"hidden"}}  className="d-flex flex-column float-left col-md-2">
+            <Link to="/home"><img className="w-75" src={logo} alt=""/></Link>
+                        
             <br/>
             <Link to="/order">Order</Link><br/>
             <Link to="/yourcourse">Services</Link><br/>
             <Link to="/yourreview">Review</Link><br/>
-            <Link to="/">Services list</Link><br/>
-            <Link to="/">Add service</Link><br/>
-            <Link to="/">Make Admin</Link>
+            <Link to="/serviceslist">Services list</Link><br/>
+            <Link to="/addservices">Add service</Link><br/>
+            <Link to="/makeadmin">Make Admin</Link>
             
         </div>
     );

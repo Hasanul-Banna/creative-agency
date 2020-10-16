@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Nav from './Nav';
 import frame from '../images/Frame.png';
 import slack from '../images/logos/slack.png';
@@ -10,11 +10,30 @@ import Services from './Services';
 import Slider from './Slider';
 import Review from './Review';
 
-const Home = () => {
-    const reviewData = [{ Photo: 'customer-2.png', name: 'Steve Jobless', designition: 'CEO,MacroSoft', comment: 'Lorem, ipsum dolor sit amet consectetur adipisicing.' }, { Photo: 'customer-2.png', name: 'Steve Jobless', designition: 'CEO,MacroSoft', comment: 'Lorem, ipsum dolor sit amet consectetur adipisicing.' }, { Photo: 'customer-2.png', name: 'Steve Jobless', designition: 'CEO,MacroSoft', comment: 'Lorem, ipsum dolor sit amet consectetur adipisicing.' }];
-    const cardData = [{ name: 'web design', logo: 'service1.png', description: ' Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolore, minima?' }, { name: 'Graphics design', logo: 'service2.png', description: ' Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolore, minima?' }, { name: 'web deveopment', logo: 'service3.png', description: ' Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolore, minima?' }];
-    return (
 
+const Home = () => { 
+    const [serviceData ,setServiceData] = useState([])
+    useEffect(() =>{
+        fetch('http://localhost:5000/AllCardItem')
+        .then(res => res.json())
+        .then(data => {           
+            setServiceData(data);
+            //  console.log(data);
+        })
+    },[]) 
+    
+    const [reviewData ,setReviewData] = useState([])
+    useEffect(() =>{
+        fetch('http://localhost:5000/getReview')
+        .then(res => res.json())
+        .then(data => {           
+            setReviewData(data);
+            //  console.log(data);
+        })
+    },[]) 
+
+
+    return (
         <div>
             <Nav></Nav>
             <section className="container-fluid main-banner">
@@ -42,9 +61,9 @@ const Home = () => {
 
             <section className="container pt-5 pb-3 text-center">
                 <h2>Provide awesome <span>services</span></h2>
-                <div className="row">
+                <div className="d-flex flex-wrap justify-content-around  ">
                     {
-                        cardData.map(x => <Services img={x.logo} name={x.name} des={x.description}></Services>)
+                        serviceData.map(x => <Services img={x.file.name} name={x.service} des={x.description}></Services>)
                     }
                 </div>
             </section>
@@ -58,7 +77,7 @@ const Home = () => {
                 <h2 className="text-center pb-5">Client's <span>Feedback</span></h2>
                 <div className="row">
                     {
-                        reviewData.map(x => <Review img={x.Photo} name={x.name} designition={x.designition} description={x.comment} ></Review>)
+                        reviewData.map(x => <Review  name={x.name} designition={x.designition} description={x.description} ></Review>)
                     }
                 </div>
             </section>

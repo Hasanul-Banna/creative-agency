@@ -1,34 +1,36 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
+import { UserContext } from '../App';
 import Sidebar from './Sidebar';
 
 const Order = () => {
+    const [loggedInUser, setLoggedInUser] = useContext(UserContext);
     const { register, handleSubmit, errors } = useForm();
     const onSubmit = data => {
-        fetch('http://localhost:5000/addServices',{
-            method:'POST',
-            headers:{ 'content-type':'application/json'},
-            body : JSON.stringify(data)
+        fetch('http://localhost:5000/addServices', {
+            method: 'POST',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify(data)
         })
-        .then( res => res.json())
-        .then(success => {
-            if (success) {
-                alert('Congrats! New Service Addded')
-            }
-        } )
+            .then(res => res.json())
+            .then(success => {
+                if (success) {
+                    alert('Congrats! New Service Addded')
+                }
+            })
     };
     return (
-        <div className="d-flex flex-wrap ml-4 mt-2" >
+        <div className="row ml-4 mt-2" >
             <Sidebar></Sidebar>
-            <div style={{ width: "80%" }}>
+            <div className="col-md-6">
 
                 <form className="pt-5 pr-5" onSubmit={handleSubmit(onSubmit)}>
                     <div className="form-group">
-                        <input type="text" ref={register({ required: true })} name="name" placeholder="Your Name" className="form-control" />
+                        <input value={loggedInUser.user} type="text" ref={register({ required: true })} name="name" placeholder="Your Name" className="form-control" />
                         {errors.name && <span className="text-danger">This field is required</span>}
                     </div>
                     <div className="form-group">
-                        <input type="text" ref={register({ required: true })} name="email" placeholder="Email" className="form-control" />
+                        <input value={loggedInUser.email} type="text" ref={register({ required: true })} name="email" placeholder="Email" className="form-control" />
                         {errors.email && <span className="text-danger">This field is required</span>}
                     </div>
                     <div className="form-group">
