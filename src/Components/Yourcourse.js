@@ -14,21 +14,25 @@ const Yourcourse = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
-                // const filteredData = data.find(x => x.email === loggedInUser.email);
                 setuserEvent(data)
             })
     }, []);
     return (
-        <div style={{overflowX:"hidden"}}  className="row pl-4 mt-2" >
+        <div style={{ overflowX: "hidden" }} className="row pl-4 mt-2" >
             <Sidebar></Sidebar>
-            <div style={{overflowX:"hidden"}} className="col-md-10">
-                <div className="row">
-                {
-                    userEvent.map(x => <Enrolled name={x.service} des={x.description} ></Enrolled>)
-                }
+            <div style={{ overflowX: "hidden" }} className="col-md-10">
+            <div className="d-flex justify-content-between">
+                    <h3> Dashboard:Your Courses</h3> 
+                    <div>
+                        <img style={{width:"50px",height:"50px", borderRadius:"50%"}} src={loggedInUser.photoURL} alt="" /> <span>{loggedInUser.user}</span>
+                    </div>
                 </div>
-               
+                <div className="row">
+                    {
+                        userEvent.map(x => <Enrolled name={x.service} des={x.description} ></Enrolled>)
+                    }
+                </div>
+
 
             </div>
         </div>

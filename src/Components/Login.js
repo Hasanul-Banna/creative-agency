@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
-import logo from "../images/logo.png" ;
-import ggl from "../images/google.png" ;
+import logo from "../images/logo.png";
+import ggl from "../images/google.png";
 import * as firebase from "firebase/app";
 import "firebase/auth";
 import firebaseConfig from './firebase.config';
@@ -18,23 +18,24 @@ const Login = () => {
     }
     const gglSignIn = () => {
         const provider = new firebase.auth.GoogleAuthProvider();
-        firebase.auth().signInWithPopup(provider).then(function(result) {
+        firebase.auth().signInWithPopup(provider).then(function (result) {
             // This gives you a Google Access Token. You can use it to access the Google API.
             const token = result.credential.accessToken;
-            const { displayName, email } = result.user;
-            const signedInUser = { user: displayName, email: email };
+            console.log(result.user);
+            const { displayName, email, photoURL } = result.user;
+            const signedInUser = { user: displayName, email: email, photoURL: photoURL };
             setLoggedInUser(signedInUser);
             history.replace(from);
-          }).catch(function(error) {
-           console.log(error.message);
-          });
+        }).catch(function (error) {
+            console.log(error.message);
+        });
     };
     return (
         <div>
-            <img className="Loginlogo" src={logo} alt=""/>
+            <img className="Loginlogo" src={logo} alt="" />
             <div className="glogin">
                 <button onClick={gglSignIn} className="btn btn-warning">
-                    <img src={ggl} alt=""/> Login With Google Account.
+                    <img src={ggl} alt="" /> Login With Google Account.
                 </button>
             </div>
         </div>

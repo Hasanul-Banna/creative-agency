@@ -11,26 +11,30 @@ import Slider from './Slider';
 import Review from './Review';
 
 
-const Home = () => { 
-    const [serviceData ,setServiceData] = useState([])
-    useEffect(() =>{
+const Home = () => {
+
+    const handleCard = (z) => {
+        // console.log(z);
+    }
+    const [serviceData, setServiceData] = useState([])
+    useEffect(() => {
         fetch('http://localhost:5000/AllCardItem')
-        .then(res => res.json())
-        .then(data => {           
-            setServiceData(data);
-            //  console.log(data);
-        })
-    },[]) 
-    
-    const [reviewData ,setReviewData] = useState([])
-    useEffect(() =>{
+            .then(res => res.json())
+            .then(data => {
+                setServiceData(data);
+                //  console.log(data);
+            })
+    }, [])
+
+    const [reviewData, setReviewData] = useState([])
+    useEffect(() => {
         fetch('http://localhost:5000/getReview')
-        .then(res => res.json())
-        .then(data => {           
-            setReviewData(data);
-            //  console.log(data);
-        })
-    },[]) 
+            .then(res => res.json())
+            .then(data => {
+                setReviewData(data);
+                //  console.log(data);
+            })
+    }, [])
 
 
     return (
@@ -63,7 +67,7 @@ const Home = () => {
                 <h2>Provide awesome <span>services</span></h2>
                 <div className="d-flex flex-wrap justify-content-around  ">
                     {
-                        serviceData.map(x => <Services img={x.file.name} name={x.service} des={x.description}></Services>)
+                        serviceData.map(x => <Services handleCard={handleCard} id={x.service} img={x.file.name} name={x.service} des={x.description}></Services>)
                     }
                 </div>
             </section>
@@ -77,31 +81,31 @@ const Home = () => {
                 <h2 className="text-center pb-5">Client's <span>Feedback</span></h2>
                 <div className="row">
                     {
-                        reviewData.map(x => <Review  name={x.name} designition={x.designition} description={x.description} ></Review>)
+                        reviewData.map(x => <Review name={x.name} designition={x.designition} description={x.description} ></Review>)
                     }
                 </div>
             </section>
 
             <section id="footer" className="container-fluid p-5">
                 <div className="row">
-                <div className=" col-md-6">
-                    <h2>Let us handle your <br /> project , professionally</h2>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione doloribus aspernatur officiis corporis ad labore, odit veniam quo! Deleniti nobis molestias fugit maxime rem iusto voluptate. Quo totam accusantium reprehenderit.</p>
-                </div>
-                <div className="col-md-6">
-                    <form>
-                        <div class="form-group">
-                            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Your Email" />
-                        </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Your name/Company name" />
-                        </div>
-                        <div class="form-group">
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Your message here..."></textarea>
-                        </div>
-                        <input type="submit" value="Send" className="btn btn-dark"/>
-                    </form>
-                </div>
+                    <div className=" col-md-6">
+                        <h2>Let us handle your <br /> project , professionally</h2>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione doloribus aspernatur officiis corporis ad labore, odit veniam quo! Deleniti nobis molestias fugit maxime rem iusto voluptate. Quo totam accusantium reprehenderit.</p>
+                    </div>
+                    <div className="col-md-6">
+                        <form>
+                            <div class="form-group">
+                                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Your Email" />
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Your name/Company name" />
+                            </div>
+                            <div class="form-group">
+                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Your message here..."></textarea>
+                            </div>
+                            <input type="submit" value="Send" className="btn btn-dark" />
+                        </form>
+                    </div>
                 </div>
 
             </section>

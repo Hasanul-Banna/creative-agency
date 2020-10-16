@@ -23,7 +23,12 @@ const YourReview = () => {
         <div className="row ml-4 mt-2" >
             <Sidebar></Sidebar>
             <div className="col-md-6">
-
+            <div className="d-flex justify-content-between">
+                    <h3> Dashboard:Give YOur Feedback!</h3> 
+                    <div>
+                        <img style={{width:"50px",height:"50px", borderRadius:"50%"}} src={loggedInUser.photoURL} alt="" /> <span>{loggedInUser.user}</span>
+                    </div>
+                </div>
                 <form className="pt-5 pr-5" onSubmit={handleSubmit(onSubmit)}>
                     <div className="form-group">
                         <input type="text" ref={register({ required: true })} name="name" placeholder="Your Name" className="form-control" />
